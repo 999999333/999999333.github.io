@@ -42,7 +42,8 @@ end
 
 
         ----------  strings
-        "ResponseValue" as questionnaire_answer,
+        RIGHT("ResponseValue", LEN("ResponseValue") - 2) as questionnaire_answer,
+
         "ExternalCode" as questionnaire_answer_external_code,
 
         ----------  numerics

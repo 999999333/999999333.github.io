@@ -19,6 +19,7 @@ final as (
         sfa_file.country_code,
         sfa_file.sfa_file_key,
         sfa_file.sfa_file_name,
+        sfa_file.sfa_file_id,
         sfa_file.sfa_file_name_unique,
         sfa_file.comment,
         sfa_file.is_edited,
