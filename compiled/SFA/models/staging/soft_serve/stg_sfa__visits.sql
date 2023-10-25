@@ -10,8 +10,17 @@ renamed as (
     lower(convert(varchar(50), hashbytes('md5', coalesce(convert(varchar(8000), concat(coalesce(cast(Country_Code as VARCHAR(8000)), '_dbt_utils_surrogate_key_null_'), '-', coalesce(cast(OlCard_id as VARCHAR(8000)), '_dbt_utils_surrogate_key_null_'))), '')), 2))
  as visit_id,
         "OlCard_id" as visit_key,
-        "Ol_id" as outlet_id,
-        "Merch_id" as merchant_id,
+      
+        
+    lower(convert(varchar(50), hashbytes('md5', coalesce(convert(varchar(8000), concat(coalesce(cast(Country_Code as VARCHAR(8000)), '_dbt_utils_surrogate_key_null_'), '-', coalesce(cast(Ol_id as VARCHAR(8000)), '_dbt_utils_surrogate_key_null_'))), '')), 2))
+ as outlet_id,
+        "Ol_id" as outlet_key,
+        
+        
+    lower(convert(varchar(50), hashbytes('md5', coalesce(convert(varchar(8000), concat(coalesce(cast(Country_Code as VARCHAR(8000)), '_dbt_utils_surrogate_key_null_'), '-', coalesce(cast(Merch_id as VARCHAR(8000)), '_dbt_utils_surrogate_key_null_'))), '')), 2))
+ as merchant_id,
+        "Merch_id" as merchant_key,
+
         
 case
   when Country_Code = 'CZ' then 422

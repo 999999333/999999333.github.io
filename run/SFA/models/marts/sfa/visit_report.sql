@@ -43,6 +43,7 @@ final as (
     select
         visit.country_id,
         visit.visit_id,
+        visit.visit_key,
         visit.visit_date,
         organizational_structure.structure_whole_node_tree,
         organizational_structure.structure_name_detail,

@@ -31,6 +31,7 @@ final as (
         organizational_structure.dbt_scd_id as organizational_structure_key,
         outlet.dbt_scd_id as outlet_key,
         inaccessibility_reason.dbt_scd_id as inaccessibility_reason_key
+
         -- organizational_structure.structure_name,
         -- organizational_structure.structure_whole_node_tree,
         -- organizational_structure.structure_name_detail,

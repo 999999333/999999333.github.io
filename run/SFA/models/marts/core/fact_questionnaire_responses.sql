@@ -1,4 +1,11 @@
-with responded_on_visit as (
+
+    
+
+
+    
+    
+
+    EXEC('create view "dbt"."fact_questionnaire_responses__dbt_tmp" as with responded_on_visit as (
     select * from "DWH_Fabric"."dbt"."stg_sfa__questionnaire_responded_on_visit"
 ),
 
@@ -33,4 +40,6 @@ final as (
 )
 
 
-select * from final
+select * from final;');
+
+

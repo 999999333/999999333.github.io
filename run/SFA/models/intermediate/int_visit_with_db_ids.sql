@@ -1,11 +1,18 @@
 
+  
+    
+   
+
+   
+
+    
     
 
 
     
     
 
-    EXEC('create view "dbt"."int_visit_with_db_ids__dbt_tmp" as 
+    EXEC('create view "dbt"."int_visit_with_db_ids__dbt_tmp_temp_view" as 
 
 with visit as (
     select * from "DWH_Fabric"."dbt"."stg_sfa__visits"
@@ -38,6 +45,7 @@ final as (
         organizational_structure.dbt_scd_id as organizational_structure_key,
         outlet.dbt_scd_id as outlet_key,
         inaccessibility_reason.dbt_scd_id as inaccessibility_reason_key
+
         -- organizational_structure.structure_name,
         -- organizational_structure.structure_whole_node_tree,
         -- organizational_structure.structure_name_detail,
@@ -96,3 +104,22 @@ and
 select * from final;');
 
 
+
+    
+      EXEC('CREATE TABLE "dbt"."int_visit_with_db_ids__dbt_tmp" AS (SELECT * FROM "dbt"."int_visit_with_db_ids__dbt_tmp_temp_view");');
+    
+
+    
+      
+      
+      
+
+    
+    
+
+    EXEC('DROP view IF EXISTS "dbt"."int_visit_with_db_ids__dbt_tmp_temp_view";');
+
+
+
+
+  

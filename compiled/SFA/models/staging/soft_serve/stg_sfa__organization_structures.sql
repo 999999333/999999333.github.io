@@ -11,7 +11,10 @@ renamed as (
         
     lower(convert(varchar(50), hashbytes('md5', coalesce(convert(varchar(8000), concat(coalesce(cast(Country_Code as VARCHAR(8000)), '_dbt_utils_surrogate_key_null_'), '-', coalesce(cast(OrgStructureID as VARCHAR(8000)), '_dbt_utils_surrogate_key_null_'))), '')), 2))
  as _id,
-        "OrgStructureID" as organizational_structure_id,
+        
+    lower(convert(varchar(50), hashbytes('md5', coalesce(convert(varchar(8000), concat(coalesce(cast(Country_Code as VARCHAR(8000)), '_dbt_utils_surrogate_key_null_'), '-', coalesce(cast(OrgStructureID as VARCHAR(8000)), '_dbt_utils_surrogate_key_null_'))), '')), 2))
+ as organizational_structure_id,
+        "OrgStructureID" as organizational_structure_key,
         "ParentID" as parent_structure_id,
         "NodeId" as structure_node_id,
         "Level"  as structure_node_level,

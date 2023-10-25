@@ -50,7 +50,10 @@ renamed as (
         ----------  ids
         
         "dbt_scd_id" as dbt_scd_id,
-        "OL_id" as outlet_id,
+        
+    lower(convert(varchar(50), hashbytes(''md5'', coalesce(convert(varchar(8000), concat(coalesce(cast(Country_Code as VARCHAR(8000)), ''_dbt_utils_surrogate_key_null_''), ''-'', coalesce(cast(OL_id as VARCHAR(8000)), ''_dbt_utils_surrogate_key_null_''))), '''')), 2))
+ as outlet_id,
+        "OL_id" as outlet_key,
         "OLSubType_id" as outlet_subtype_id,
         "Area_id" as area_id,
         
