@@ -1,0 +1,114 @@
+
+      
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  UPDATE DBT_INTERNAL_DEST
+  SET dbt_valid_to = DBT_INTERNAL_SOURCE.dbt_valid_to
+  FROM "snapshots"."sfa__products_snapshot" as DBT_INTERNAL_DEST
+  INNER JOIN "snapshots"."sfa__products_snapshot__dbt_tmp" as DBT_INTERNAL_SOURCE
+  on DBT_INTERNAL_SOURCE.dbt_scd_id = DBT_INTERNAL_DEST.dbt_scd_id
+  WHERE DBT_INTERNAL_DEST.dbt_valid_to is null
+  AND DBT_INTERNAL_SOURCE.dbt_change_type in ('update', 'delete');
+
+  INSERT INTO "snapshots"."sfa__products_snapshot" ("Country_Code", "Product_Id", "ProductCode", "ProductType_Id", "ProductName", "ProductShortName", "Unit_Id", "UnitWeight", "Package_QTY", "SortOrder", "DLM", "Status", "ULM", "Price", "IsMix", "IsTare", "Tare_Id", "TarePack_Qty", "IsReturnable", "IsConcurrent", "ProductVolume", "IsProductWeight", "CertificateNo", "CertificateBeginDate", "CertificateEndDate", "HLCode", "IsBonuse", "EANCode", "LicenseType_ID", "ProductBrand_ID", "Delisted", "Quant_Qty", "ProductCode2", "SyncToDDB", "ServiceBit", "IsPromotional", "IsLinkedToAllCustomers", "FrontWidth", "FrontHeight", "HasActiveContentFile", "IsSeasonal", "IsBaseProduct", "ForRecognition", "IsExchangeBottle", "IsPosm", "dbt_updated_at", "dbt_valid_from", "dbt_valid_to", "dbt_scd_id")
+  SELECT DBT_INTERNAL_SOURCE."Country_Code", DBT_INTERNAL_SOURCE."Product_Id", DBT_INTERNAL_SOURCE."ProductCode", DBT_INTERNAL_SOURCE."ProductType_Id", DBT_INTERNAL_SOURCE."ProductName", DBT_INTERNAL_SOURCE."ProductShortName", DBT_INTERNAL_SOURCE."Unit_Id", DBT_INTERNAL_SOURCE."UnitWeight", DBT_INTERNAL_SOURCE."Package_QTY", DBT_INTERNAL_SOURCE."SortOrder", DBT_INTERNAL_SOURCE."DLM", DBT_INTERNAL_SOURCE."Status", DBT_INTERNAL_SOURCE."ULM", DBT_INTERNAL_SOURCE."Price", DBT_INTERNAL_SOURCE."IsMix", DBT_INTERNAL_SOURCE."IsTare", DBT_INTERNAL_SOURCE."Tare_Id", DBT_INTERNAL_SOURCE."TarePack_Qty", DBT_INTERNAL_SOURCE."IsReturnable", DBT_INTERNAL_SOURCE."IsConcurrent", DBT_INTERNAL_SOURCE."ProductVolume", DBT_INTERNAL_SOURCE."IsProductWeight", DBT_INTERNAL_SOURCE."CertificateNo", DBT_INTERNAL_SOURCE."CertificateBeginDate", DBT_INTERNAL_SOURCE."CertificateEndDate", DBT_INTERNAL_SOURCE."HLCode", DBT_INTERNAL_SOURCE."IsBonuse", DBT_INTERNAL_SOURCE."EANCode", DBT_INTERNAL_SOURCE."LicenseType_ID", DBT_INTERNAL_SOURCE."ProductBrand_ID", DBT_INTERNAL_SOURCE."Delisted", DBT_INTERNAL_SOURCE."Quant_Qty", DBT_INTERNAL_SOURCE."ProductCode2", DBT_INTERNAL_SOURCE."SyncToDDB", DBT_INTERNAL_SOURCE."ServiceBit", DBT_INTERNAL_SOURCE."IsPromotional", DBT_INTERNAL_SOURCE."IsLinkedToAllCustomers", DBT_INTERNAL_SOURCE."FrontWidth", DBT_INTERNAL_SOURCE."FrontHeight", DBT_INTERNAL_SOURCE."HasActiveContentFile", DBT_INTERNAL_SOURCE."IsSeasonal", DBT_INTERNAL_SOURCE."IsBaseProduct", DBT_INTERNAL_SOURCE."ForRecognition", DBT_INTERNAL_SOURCE."IsExchangeBottle", DBT_INTERNAL_SOURCE."IsPosm", DBT_INTERNAL_SOURCE."dbt_updated_at", DBT_INTERNAL_SOURCE."dbt_valid_from", DBT_INTERNAL_SOURCE."dbt_valid_to", DBT_INTERNAL_SOURCE."dbt_scd_id" FROM "snapshots"."sfa__products_snapshot__dbt_tmp" as DBT_INTERNAL_SOURCE
+  WHERE  DBT_INTERNAL_SOURCE.dbt_change_type = 'insert';
+
+  

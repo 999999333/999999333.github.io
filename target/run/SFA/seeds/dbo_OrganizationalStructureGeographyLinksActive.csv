@@ -1,0 +1,14 @@
+
+    
+    
+    
+    create table "SFA_Warehouse"."dbt"."dbo_OrganizationalStructureGeographyLinksActive" ("Country_Code;OrgStructureID;GeographyID;DLM;Valid_From;Valid_To" varchar(118))
+  ;
+    -- dbt seed --
+    
+          insert into "SFA_Warehouse"."dbt"."dbo_OrganizationalStructureGeographyLinksActive" ("Country_Code;OrgStructureID;GeographyID;DLM;Valid_From;Valid_To") values
+          (?),(?),(?),(?),(?),(?),(?),(?),(?),(?),(?),(?)
+      
+
+;
+  
