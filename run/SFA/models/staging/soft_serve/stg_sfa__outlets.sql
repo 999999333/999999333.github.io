@@ -17,7 +17,6 @@ renamed as (
         "Proximity",
         "Location",
         "VisitFrequency",
-        "OL_Code"  as outlet_sap_code,
         "BankCode",
         "BankName",
         "BankAddress",
@@ -40,7 +39,6 @@ renamed as (
         "DeliveryDelay",
         "DeactivateDate",
         "InactivationCandidate",
-
         "PrevOL_Code",
         "PostalCode",
         "KOATUU",
@@ -56,6 +54,7 @@ renamed as (
         "OL_id" as outlet_key,
         "OLSubType_id" as outlet_subtype_id,
         "Area_id" as area_id,
+        "Country_Code" as country_code,
         
 case
   when Country_Code = ''CZ'' then 422
@@ -87,9 +86,10 @@ end
         "OLEMail" as outlet_email,
         "OLAccountant" as outlet_accountant,
         "OLAccountantPhone" as outlet_accountant_phone,
-        "OLMarkManager" as outlet_markteting,
+        "OLMarkManager" as outlet_marketing,
         "OLMarkManagerPhone" as outlet_marketing_phone,
         "OLPurchManager" as outlet_purchasing,
+        "OL_Code"  as outlet_sap_code,
         "ZKPO",
         "IPN",
         "VATN",

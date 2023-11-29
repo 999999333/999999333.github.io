@@ -7,15 +7,19 @@ renamed as (
 
         ----------  ids
         
-CONCAT(
-        ISNULL(CAST(OLCard_ID AS NVARCHAR(MAX)), '-1'),
-        ISNULL(CAST(Valid_To AS NVARCHAR(MAX)), '-1')
-    )
-    as _surrogate_key
+    lower(convert(varchar(50), hashbytes('md5', coalesce(convert(varchar(8000), concat(coalesce(cast(Country_Code as VARCHAR(8000)), '_dbt_utils_surrogate_key_null_'), '-', coalesce(cast(OLCard_ID as VARCHAR(8000)), '_dbt_utils_surrogate_key_null_'), '-', coalesce(cast(Product_id as VARCHAR(8000)), '_dbt_utils_surrogate_key_null_'))), '')), 2))
+ as distribution_id,
+        
+        
+    lower(convert(varchar(50), hashbytes('md5', coalesce(convert(varchar(8000), concat(coalesce(cast(Country_Code as VARCHAR(8000)), '_dbt_utils_surrogate_key_null_'), '-', coalesce(cast(OLCard_ID as VARCHAR(8000)), '_dbt_utils_surrogate_key_null_'))), '')), 2))
+ as visit_id,
+        "OLCard_ID" as visit_key,
 
-,
-        "OLCard_ID" as visit_id,
-        "Product_id" as product_id,
+        
+    lower(convert(varchar(50), hashbytes('md5', coalesce(convert(varchar(8000), concat(coalesce(cast(Country_Code as VARCHAR(8000)), '_dbt_utils_surrogate_key_null_'), '-', coalesce(cast(Product_id as VARCHAR(8000)), '_dbt_utils_surrogate_key_null_'))), '')), 2))
+ as product_id,
+        "Product_id" as product_key,
+
         
 case
   when Country_Code = 'CZ' then 422
@@ -25,21 +29,23 @@ case
   else -2
 end
  as country_id,
-
+        "Country_Code" as country_code,
         ----------  strings
 
         ----------  numerics
-
+        "Price" as price,
         ----------  booleans
-        "IsPresent",
+        case
+            when "IsPresent" = '1' then 1
+            else 0
+        end as is_present,
+        "IsSetup" as is_setup
 
         ----------  timestamps
-        "Valid_From",
-        "Valid_To"
+        -- "Valid_From",
+        -- "Valid_To"
 
         ----------  omited
-        -- "Price",
-        -- "IsSetup",
         -- "OutOfStockReason",        
 
     from source

@@ -1,5 +1,5 @@
 with source as (
-      select * from "DWH_Fabric"."dbt"."dbo_ResponsesSingleContentD_v"
+      select * from "DWH_Fabric"."dbt"."dbo_ResponsesSingleContentD"
 ),
 renamed as (
     select

@@ -1,4 +1,5 @@
 
+      
   
     
    
@@ -12,25 +13,49 @@
     
     
 
-    EXEC('create view "dbt"."fact_visit__dbt_tmp_temp_view" as 
+    EXEC('create view "dbt"."fact_visit_temp_view" as 
 
 with visit as (
     select * from "DWH_Fabric"."dbt"."stg_sfa__visits"
 ),
 
-visit_with_db_ids as (
-    select * from "DWH_Fabric"."dbt"."int_visit_with_db_ids"
-
-),
-
 final as (
     select 
-        visit_with_db_ids.visit_id,
-        visit_with_db_ids.country_id,
-        visit_with_db_ids.visit_key,
-        visit_with_db_ids.inaccessibility_reason_key
+        ----------  ids
+        visit_id,
+        visit_key,
+        country_id,
+        country_code,
+        inaccessibility_reason_id,
+        outlet_id,
+        route_id,
+        organizational_structure_id,
+        customer_id,
 
-    from visit_with_db_ids
+        ----------  strings
+        visit_comment,
+
+        ----------  numerics
+        visit_start_distance,
+        visit_end_distance,
+        visit_duration_sec,
+
+        ----------  booleans
+        is_quick_order,
+
+        ----------  timestamps
+        visit_date,
+        visit_start_time,
+        visit_end_time
+    
+
+    from visit
+
+    where
+
+    
+
+    dbt_valid_to >= cast(''2299-12-31'' as datetime2)
 
 )
 
@@ -39,7 +64,7 @@ select * from final;');
 
 
     
-      EXEC('CREATE TABLE "dbt"."fact_visit__dbt_tmp" AS (SELECT * FROM "dbt"."fact_visit__dbt_tmp_temp_view");');
+      EXEC('CREATE TABLE "dbt"."fact_visit" AS (SELECT * FROM "dbt"."fact_visit_temp_view");');
     
 
     
@@ -50,9 +75,10 @@ select * from final;');
     
     
 
-    EXEC('DROP view IF EXISTS "dbt"."fact_visit__dbt_tmp_temp_view";');
+    EXEC('DROP view IF EXISTS "dbt"."fact_visit_temp_view";');
 
 
 
 
+  
   

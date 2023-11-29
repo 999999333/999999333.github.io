@@ -7,15 +7,16 @@ with inaccessibility_reason as (
 
 final as (
     select
-        dbt_scd_id as inaccessibility_reason_id,
+        --dbt_scd_id,
+        inaccessibility_reason_id,
         inaccessibility_reason,
         country_id,
         country_code,
-        inaccessibility_reason_external_code,
-        dbt_valid_from,
-        dbt_valid_to
+        inaccessibility_reason_external_code
     from
         inaccessibility_reason
+    where
+        dbt_valid_to >= cast('2299-12-31' as datetime2)
 )
 
 select *

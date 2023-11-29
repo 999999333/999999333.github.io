@@ -7,9 +7,9 @@ renamed as (
         "dbt_scd_id",
         
     lower(convert(varchar(50), hashbytes('md5', coalesce(convert(varchar(8000), concat(coalesce(cast(Country_Code as VARCHAR(8000)), '_dbt_utils_surrogate_key_null_'), '-', coalesce(cast(Staff_id as VARCHAR(8000)), '_dbt_utils_surrogate_key_null_'))), '')), 2))
- as _id,
-        "Staff_id" as staff_id,
-        "Staff_Code" as staff_code,
+ as staff_id,
+        "Staff_id" as staff_key,
+        "Staff_Code" as staff_sap_code,
         
 case
   when Country_Code = 'CZ' then 422
@@ -19,6 +19,7 @@ case
   else -2
 end
  as country_id,
+         "Country_Code" as country_code,
 
         ----------  strings
         "Name" as staff_name_whole,

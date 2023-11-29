@@ -1,0 +1,73 @@
+
+  
+    
+   
+
+   
+
+    
+    
+
+
+    
+    
+
+    EXEC('create view "dbt"."distribution_report__dbt_tmp_temp_view" as 
+
+with outlet_distribution as (
+    select
+        visit_id,
+        visit_date,
+        outlet_id,
+        product_id,
+        country_id,
+        product_name,
+        is_pos_material,
+        product_sap_code,
+        is_present,
+        price,
+        rank() over (partition by (outlet_id + product_id) order by visit_date desc) as visit_rank
+    from
+        "DWH_Fabric"."dbt"."fact_outlet_distributions"
+    where
+        visit_date >= dateadd(month, -2, getdate())
+),
+
+final as(
+    select
+        outlet_id,
+        product_id,
+        case
+            when max(case when visit_rank <= 2 then is_present end) = ''1'' then 1
+            else 0
+        end as is_distributed
+    from
+        outlet_distribution
+    group by
+        outlet_id,
+        product_id
+
+)
+
+select * from final;');
+
+
+
+    
+      EXEC('CREATE TABLE "dbt"."distribution_report__dbt_tmp" AS (SELECT * FROM "dbt"."distribution_report__dbt_tmp_temp_view");');
+    
+
+    
+      
+      
+      
+
+    
+    
+
+    EXEC('DROP view IF EXISTS "dbt"."distribution_report__dbt_tmp_temp_view";');
+
+
+
+
+  

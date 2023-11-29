@@ -30,10 +30,27 @@ case
   else -2
 end
  as country_id,
-        "Reason_ID" as inaccessibility_reason_id,
-        "Route_id" as route_id,
-        "OrgStructureID" as organizational_structure_id,
-        "Cust_id" as customer_id,
+         "Country_Code" as country_code,
+
+        
+    lower(convert(varchar(50), hashbytes('md5', coalesce(convert(varchar(8000), concat(coalesce(cast(Country_Code as VARCHAR(8000)), '_dbt_utils_surrogate_key_null_'), '-', coalesce(cast(Reason_ID as VARCHAR(8000)), '_dbt_utils_surrogate_key_null_'))), '')), 2))
+ as inaccessibility_reason_id,
+        "Reason_ID" as inaccessibility_reason_key,
+
+        
+    lower(convert(varchar(50), hashbytes('md5', coalesce(convert(varchar(8000), concat(coalesce(cast(Country_Code as VARCHAR(8000)), '_dbt_utils_surrogate_key_null_'), '-', coalesce(cast(Route_id as VARCHAR(8000)), '_dbt_utils_surrogate_key_null_'))), '')), 2))
+ as route_id,
+        "Route_id" as route_key,
+
+        
+    lower(convert(varchar(50), hashbytes('md5', coalesce(convert(varchar(8000), concat(coalesce(cast(Country_Code as VARCHAR(8000)), '_dbt_utils_surrogate_key_null_'), '-', coalesce(cast(OrgStructureID as VARCHAR(8000)), '_dbt_utils_surrogate_key_null_'))), '')), 2))
+ as organizational_structure_id,
+        "OrgStructureID" as organizational_structure_key,
+
+        
+    lower(convert(varchar(50), hashbytes('md5', coalesce(convert(varchar(8000), concat(coalesce(cast(Country_Code as VARCHAR(8000)), '_dbt_utils_surrogate_key_null_'), '-', coalesce(cast(Cust_id as VARCHAR(8000)), '_dbt_utils_surrogate_key_null_'))), '')), 2))
+ as customer_id,
+        "Cust_id" as customer_key,
 
         ----------  strings
         "Comments" as visit_comment,
@@ -46,7 +63,6 @@ end
         "OlCardWeek" as visit_week,
         "DistributionCaptureMode",
         "CommentsDestination",
-        "VisitTimeSec",
         "DistanceToOutlet" as visit_start_distance,
         "DistanceToOutlet_End" as visit_end_distance,
         "FacingCaptureMode",
@@ -65,13 +81,14 @@ end
         "QuickOrder" as is_quick_order,
 
         ----------  timestamps
-        "OlCardDate" as visit_date,
-        "BeginTime" as visit_start_time,
-        "EndTime" as visit_end_time,
+        cast("OlCardDate" as date) as visit_date,
+        cast("BeginTime" as time(2)) as visit_start_time,
+        cast("EndTime" as time(2)) as visit_end_time,
+        "VisitTimeSec" as visit_duration_sec,
         "EndTimeChange" as visit_end_time_edit,
         "DLM" as dlm,
-        dbt_valid_from as valid_from,
-        dbt_valid_to as valid_to
+        dbt_valid_from as dbt_valid_from,
+        coalesce("dbt_valid_to", cast('2299-12-31' as datetime)) as dbt_valid_to
 
         
         ----------  omited

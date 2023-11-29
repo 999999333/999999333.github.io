@@ -6,8 +6,14 @@ renamed as (
     select
         ----------  ids
         "dbt_scd_id" as dbt_scd_id,
-        "Reason_id" as inaccessibility_reason_id,
+
+        
+    lower(convert(varchar(50), hashbytes('md5', coalesce(convert(varchar(8000), concat(coalesce(cast(Country_Code as VARCHAR(8000)), '_dbt_utils_surrogate_key_null_'), '-', coalesce(cast(Reason_id as VARCHAR(8000)), '_dbt_utils_surrogate_key_null_'))), '')), 2))
+ as inaccessibility_reason_id,       
+        "Reason_id" as inaccessibility_reason_key,
+
         "ExternalCode" as inaccessibility_reason_external_code,
+            
         
 case
   when Country_Code = 'CZ' then 422
@@ -31,7 +37,7 @@ end
         ----------  timestamps
         "DLM" as dlm,
         "dbt_valid_from" as dbt_valid_from,
-        coalesce("dbt_valid_to", cast('2299-12-31' as datetime)) as dbt_valid_to
+        coalesce("dbt_valid_to", cast('2299-12-31' as datetime2)) as dbt_valid_to
 
         ----------  omited
         --"IsLegal",

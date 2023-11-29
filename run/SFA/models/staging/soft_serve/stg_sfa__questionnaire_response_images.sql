@@ -6,7 +6,7 @@
     
 
     EXEC('create view "dbt"."stg_sfa__questionnaire_response_images__dbt_tmp" as with source as (
-      select * from "DWH_Fabric"."dbt"."dbo_ResponsesSingleContentD_v"
+      select * from "DWH_Fabric"."dbt"."dbo_ResponsesSingleContentD"
 ),
 renamed as (
     select
