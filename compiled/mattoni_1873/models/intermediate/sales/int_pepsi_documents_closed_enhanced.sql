@@ -1,3 +1,6 @@
+
+
+
 with document as (
 	select * from "L50_SB_Vitek"."sfa"."stg_sap__documents_closed"
 ),

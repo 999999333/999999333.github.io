@@ -1,7 +1,10 @@
 
     USE [L50_SB_Vitek];
     execute('create view "sfa"."int_kmv_documents_open_enhanced__dbt_tmp" as
-        with document as (
+        
+
+
+with document as (
 	select * from "L50_SB_Vitek"."sfa"."stg_sap__documents_open_kmv"
 ),
 
@@ -69,7 +72,7 @@ final as (
 
 	where
 		product.material_type_code = ''FERT''
-		and document.document_date_id >= 20231000
+		and document.document_date_id >= 20231200
 
 	group by 
 		calendar.last_of_month,

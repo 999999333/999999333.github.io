@@ -1,7 +1,10 @@
 
     USE [L50_SB_Vitek];
     execute('create view "sfa"."int_pepsi_documents_open_enhanced__dbt_tmp" as
-        with document as (
+        
+
+
+with document as (
 	select * from "L50_SB_Vitek"."sfa"."stg_sap__documents_open"
 ),
 
@@ -86,7 +89,7 @@ final as (
 	where
 		product.material_type_code = ''FERT''
         and entity.entity_sap_code = ''PEPSI''
-		and document.document_date_id >= 20231000
+		and document.document_date_id >= 20231200
 
 	group by 
 		calendar.last_of_month,
