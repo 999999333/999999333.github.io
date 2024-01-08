@@ -83,7 +83,7 @@ final as (
 	where
 		product.material_type_code = 'FERT'
         and entity.entity_sap_code = 'PEPSI'
-		and document.document_date_id >= 20231000
+		and document.document_date_id >= 20231200
 
 	group by 
 		calendar.last_of_month,
